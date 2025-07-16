@@ -36,9 +36,13 @@ function displayItems(){
 
 
 function addToCart(item){
-    bagItems.push(item);
-    localStorage.setItem('bagItems', JSON.stringify(bagItems));
-    displayBagItems();
+    if (!bagItems.includes(item)) {
+        bagItems.push(item);
+        localStorage.setItem('bagItems', JSON.stringify(bagItems));
+        displayBagItems();
+    } else {
+        alert('Item already in bag');
+    }
 }
 
 function displayBagItems() {
@@ -46,10 +50,8 @@ function displayBagItems() {
     if (localStorage.getItem('bagItems')) {
        let totalItemInBag = JSON.parse(localStorage.getItem('bagItems'));
         bagSpan.innerHTML = totalItemInBag.length;
-        bagSpan.style.display = 'block';
     }else{
         bagSpan.innerHTML = 0;
-        bagSpan.style.display = 'none';
     }
 }
 
