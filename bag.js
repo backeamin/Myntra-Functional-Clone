@@ -1,5 +1,6 @@
 let bagItemObjects;
-const CONVENIENCE_FEE = 99;
+let convenience_fee = bagItems.length !== 0? 99:0;
+console.log(bagItems.length);
 onload();
 function onload() {
     generateIdToItem();
@@ -37,7 +38,7 @@ function displayBagSummary() {
        totalMrp += item.original_price;
        totalDiscount += (item.original_price - item.current_price);
     });
-    let totalAmount = totalMrp - totalDiscount + CONVENIENCE_FEE; // Adding convenience fee
+    let totalAmount = totalMrp - totalDiscount + convenience_fee; // Adding convenience fee
 
     bagSummaryContainer.innerHTML = `
     <div class="bag-details-container">
@@ -52,7 +53,7 @@ function displayBagSummary() {
             </div>
             <div class="price-item">
               <span class="price-item-tag">Convenience Fee</span>
-              <span class="price-item-value">Tk ${CONVENIENCE_FEE}</span>
+              <span class="price-item-value">Tk ${convenience_fee}</span>
             </div>
             <hr>
             <div class="price-footer">
@@ -72,6 +73,7 @@ function removeItemFromBag(itemId) {
     generateIdToItem();
     displayBagContents();
     displayBagItems();
+    bagItems.length===0? convenience_fee = 0: convenience_fee = 99;
     displayBagSummary();
 }
 
